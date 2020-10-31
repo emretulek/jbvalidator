@@ -1,0 +1,13 @@
+{
+  "maxValue": "The number you enter cannot be greater than %s.",
+  "minValue": "The number you entered can be at least %s.",
+  "maxLength": "You can use up to %s characters. You are using %s characters.",
+  "minLength": "You must use at least %s characters, you are using %s characters.",
+  "minSelectOption": "Please select at least %s options.",
+  "maxSelectOption": "Please select at most %s options.",
+  "groupCheckBox": "Please select at least %s options.",
+  "equal": "Does not match the %s field.",
+  "fileMinSize": "File size cannot be less than %s bytes.",
+  "fileMaxSize": "File size cannot be more than %s bytes.",
+  "number": "Please write a number."
+}

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+    <title>HTML 5 & Bootstrap Jquery Form Validation Plugin</title>
+</head>
+<body>
+<div class="container">
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-8">
+            <h1>HTML 5 & Bootstrap Jquery Form Validation Plugin</h1>
+            <div class="bg-light my-5 p-3">
+                <h3>HTML 5 & Bootstrap 5 & Jquery 3</h3>
+                <ul>
+                    <li><b>Html 5 validation</b></li>
+                    <li><b>data-v-equal</b>: id of the element that should be the same</li>
+                    <li><b>data-v-min-select</b>: multiple selectbox, minimum selectable count</li>
+                    <li><b>data-v-max-select</b>: multiple selectbox, maximum selectable count</li>
+                    <li><b>data-checkbox-group</b>: the parent attribute of group checkbox elements
+                        <ol><b>data-v-min-select</b>: parent attribute minimum selectable count</ol>
+                        <ol><b>data-v-required</b>: parent attribute required</ol>
+                    </li>
+                    <li><b>data-v-min</b>: alternative of the min attribute, this can be used for attribute type text</li>
+                    <li><b>data-v-max</b>: alternative of the max attribute, this can be used for attribute type text</li>
+                    <li><b>data-v-min-length</b>: alternative of the minlength attribute</li>
+                    <li><b>data-v-max-length</b>: alternative of the maxlength attribute</li>
+                    <li><b>data-v-min-size</b>: the input type file minimum file size (byte)</li>
+                    <li><b>data-v-max-size</b>: the input type file maximum file size (byte)</li>
+                    <li><b>data-v-message</b>: alternative error mesage</li>
+                </ul>
+            </div>
+            <div class="bg-light my-5 p-3">
+                <h3>Usage</h3>
+    <code>
+        <pre>
+        &lt;script src=&quot;dist/jbvalidator.min.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            $(function (){
+
+                let validator = $('form.needs-validation').jbvalidator({
+                    errorMessage: true,
+                    successClass: true,
+
+                });
+
+                //custom validate methode
+                validator.validator.custom = function(el, event){
+                    if($(el).is('[name=password]') && $(el).val().length < 5){
+                        return 'Your password is too weak.';
+                    }
+                }
+            })
+        &lt;/script&gt;
+        </pre>
+    </code>
+            </div>
+            <div class="bg-light my-5 p-3">
+                <h3>Options</h3>
+    <code><pre>
+    {
+        language: '', //json file url
+        errorMessage: true,
+        successClass: false,
+        validFeedBackClass: 'valid-feedbak',
+        invalidFeedBackClass: 'invalid-feedback',
+        validClass: 'is-valid',
+        invalidClass: 'is-invalid'
+    }
+    </pre></code>
+            </div>
+            <div class="bg-light my-5 p-3">
+                <h3>Language file content</h3>
+    <code><pre>
+    {
+      "maxValue": "The number you enter cannot be greater than %s.",
+      "minValue": "The number you entered can be at least %s.",
+      "maxLength": "You can use up to %s characters. You are using %s characters.",
+      "minLength": "You must use at least %s characters, you are using %s characters.",
+      "minSelectOption": "Please select at least %s options.",
+      "maxSelectOption": "Please select at most %s options.",
+      "groupCheckBox": "Please select at least %s options.",
+      "equal": "Does not match the %s field.",
+      "fileMinSize": "File size cannot be less than %s bytes.",
+      "fileMaxSize": "File size cannot be more than %s bytes.",
+      "number": "Please write a number."
+    }
+    </pre></code>
+            </div>
+            <form class="needs-validation row g-3" novalidate>
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                        form attribute novalidate is required
+                        <code>
+                            &lt;form novalidate&gt;
+                        </code>
+                    </div>
+                </div>
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                        <label>Email address</label>
+                        <input type="email" class="form-control" placeholder="name@example.com" required>
+                    </div>
+                    <div class="py-2">
+                        <code>
+                            &lt;input type=&quot;email&quot; class=&quot;form-control&quot; placeholder=&quot;name@example.com&quot; required&gt;
+                        </code>
+                    </div>
+                </div>
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" title="password" required>
+                    </div>
+                    <div class="py-2">
+                        <code>
+                            &lt;input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;password&quot; title=&quot;password&quot; required&gt;
+                        </code>
+                        <ul>
+                            <li><b>title:</b> filed name</li>
+                            <li><b>id:</b> equal input selector</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                        <label for="password">equal - rePassword</label>
+                        <input name="repassword" type="password" class="form-control" data-v-equal="#password" required>
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;input name=&quot;repassword&quot; type=&quot;password&quot; class=&quot;form-control&quot; data-v-equal=&quot;#password&quot; required&gt;
+                        </code>
+                        <ul>
+                            <li><b>data-v-equal:</b> id of the element that should be the same</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                        <label>Example select</label>
+                        <select class="form-select" required>
+                            <option value="">Choose</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;select class=&quot;form-select&quot; required&gt;
+                            &lt;/select&gt;
+                        </code>
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                        <label>Multiple select, minimum and maximumum selectable</label>
+                        <select class="form-select" multiple data-v-min-select="2" data-v-max-select="3">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                            <option value="4">Four</option>
+                            <option value="5">Five</option>
+                        </select>
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;select class=&quot;form-select&quot; multiple data-v-min-select=&quot;2&quot; data-v-max-select=&quot;3&quot;&gt;
+                        </code>
+                        <ul>
+                            <li><b>multiple:</b> multiple select</li>
+                            <li><b>data-v-min-select:</b> minimum selectable count</li>
+                            <li><b>data-v-max-select:</b> maximum selectable count</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                        <label>Example textarea</label>
+                        <textarea class="form-control" minlength="10" maxlength="165"></textarea>
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;textarea class=&quot;form-control&quot; minlength=&quot;10&quot; maxlength=&quot;165&quot;&gt;&lt;/textarea&gt;
+                        </code>
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="col-12 p-2" data-checkbox-group data-v-min-select="2" data-v-required>
+                        <h3>Checkbox group minimum selectable</h3>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" >
+                            <label class="form-check-label" for="defaultCheck1">
+                                checkbox 1
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" >
+                            <label class="form-check-label" for="defaultCheck2">
+                                checkbox 2
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" >
+                            <label class="form-check-label" for="defaultCheck3">
+                                checkbox 3
+                            </label>
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;div data-checkbox-group data-v-min-select=&quot;2&quot; data-v-required&gt;
+
+                            &lt;/div&gt;
+                        </code>
+                        <ul>
+                            <li>Checbox group attributes</li>
+                            <li><b>data-checkbox-group</b>: parent attribute</li>
+                            <li><b>data-v-min-select</b>: parent attribute, minimum selectable</li>
+                            <li><b>data-v-required</b>: parent attribute, is required</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                        <label>URL</label>
+                        <input type="url" class="form-control" placeholder="http://www" required>
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;input type=&quot;url&quot; class=&quot;form-control&quot; placeholder=&quot;http://www&quot; required&gt;
+                        </code>
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                            <label>Color</label>
+                            <input type="color" name="color" class="form-control" required>
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;input type=&quot;color&quot; name=&quot;color&quot; class=&quot;form-control&quot; required&gt;
+                        </code>
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                            <label>Regex</label>
+                            <input type="text" class="form-control" pattern="[0-9]+" title="Only number." required>
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;input type=&quot;text&quot; class=&quot;form-control&quot; pattern=&quot;[0-9]+&quot; title=&quot;Only number.&quot; required&gt;
+                        </code>
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                            <label>number - min - max</label>
+                            <input type="number" class="form-control" min="10" max="100" required>
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;input type=&quot;number&quot; class=&quot;form-control&quot; min=&quot;10&quot; max=&quot;100&quot; required&gt;
+                        </code>
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                            <label>custom - min - max</label>
+                            <input type="text" class="form-control" data-v-min="10" data-v-max="100">
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;input type=&quot;text&quot; class=&quot;form-control&quot; data-v-min=&quot;10&quot; data-v-max=&quot;100&quot;&gt;
+                        </code>
+                        <ul>
+                            <li><b>data-v-min</b>: custom minimum number</li>
+                            <li><b>data-v-max</b>: custom maximum number</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                            <label>custom min length - max length</label>
+                            <input type="text" class="form-control" data-v-min-length="5" data-v-max-length="10">
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;input type=&quot;text&quot; class=&quot;form-control&quot; data-v-min-length=&quot;5&quot; data-v-max-length=&quot;10&quot;&gt;
+                        </code>
+                        <ul>
+                            <li><b>data-v-min-length</b>: custom minimum length</li>
+                            <li><b>data-v-max-length</b>: custom maximum length</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                            <label >file</label>
+                            <input type="file" class="form-control" data-v-min-size="400" data-v-max-size="450">
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;input type=&quot;file&quot; class=&quot;form-control&quot; data-v-min-size=&quot;400&quot; data-v-max-size=&quot;450&quot;&gt;
+                        </code>
+                        <ul>
+                            <li><b>data-v-min-size</b>: custom minimum file size (byte)</li>
+                            <li><b>data-v-max-size</b>: custom maximum file size (byte)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                            <label >date</label>
+                            <input type="date" class="form-control" min="2020-10-20">
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;input type=&quot;date&quot; class=&quot;form-control&quot; min=&quot;2020-10-20&quot;&gt;
+                        </code>
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                        <label >Custom message</label>
+                        <input type="text" class="form-control" minlength="10" data-v-message="Please enter minimum 10 characters" required>
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;input type=&quot;text&quot; class=&quot;form-control&quot; minlength=&quot;10&quot; data-v-message=&quot;Please enter minimum 10 characters&quot; required&gt;
+                        </code>
+                        <ul>
+                            <li><b>data-v-message</b>: custom error message</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row my-5 justify-content-center">
+        <div class="col-md-8">
+            <h3>Serverside validation</h3>
+            <p>.errorTrigger(element, message)</p>
+            <div class="bg-light my-5 p-3">
+    <code>
+        <pre>
+        &lt;script src=&quot;dist/jbvalidator.min.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            $(function (){
+
+               let validatorServerSide = $('form.validatorServerSide').jbvalidator({
+                    errorMessage: true,
+                    successClass: false,
+                });
+
+                //serverside
+                $(document).on('submit', '.validatorServerSide', function(){
+
+                    $.ajax({
+                        method:"get",
+                        url:"http://jsvalidation.test/test.json",
+                        data: $(this).serialize(),
+                        success: function (data){
+                            if(data.status === 'error') {
+                                validatorServerSide.errorTrigger($('[name=username]'), data.message);
+                            }
+                        }
+                    })
+
+                    return false;
+                });
+            })
+        &lt;/script&gt;
+        </pre>
+    </code>
+            </div>
+        </div>
+        <div class="col-md-8">
+
+            <form class="validatorServerSide row g-3" novalidate>
+                <div class="col-12 bg-light">
+                    <div class="p-2">
+                        <label >Username</label>
+                        <input type="text" name="username" class="form-control" required>
+                    </div>
+                    <div class="p-2">
+                        <code>
+                            &lt;input type=&quot;text&quot; name=&quot;username&quot; class=&quot;form-control&quot; required&gt;
+                        </code>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <input type="submit" class="btn btn-success" value="Submit to the server">
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<!-- JavaScript Bundle with Popper.js -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
+<script src="dist/jbvalidator.min.js"></script>
+<script>
+    $(function (){
+
+        let validator = $('form.needs-validation').jbvalidator({
+            errorMessage: true,
+            successClass: true,
+
+        });
+
+        //new custom validate methode
+        validator.validator.custom = function(el, event){
+            if($(el).is('[name=password]') && $(el).val().length < 5){
+                return 'Your password is too weak.';
+            }
+        }
+
+        let validatorServerSide = $('form.validatorServerSide').jbvalidator({
+            errorMessage: true,
+            successClass: false,
+        });
+
+        //serverside
+        $(document).on('submit', '.validatorServerSide', function(){
+
+            $.ajax({
+                method:"get",
+                url:"https://emretulek.github.io/jbvalidator/test.json",
+                data: $(this).serialize(),
+                success: function (data){
+                    if(data.status === 'error') {
+                        validatorServerSide.errorTrigger($('[name=username]'), data.message);
+                    }
+                }
+            })
+
+            return false;
+        });
+    })
+</script>
+</body>
+</html>

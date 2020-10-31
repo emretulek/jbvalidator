@@ -1,0 +1,13 @@
+{
+  "maxValue": "Lütfen %s değerini geçmeyen bir değer seçin.",
+  "minValue": "Lütfen %s değerinden daha büyük bir değer seçin.",
+  "maxLength": "Lütfen en fazla %s karakter kullanın. (Şu anda %s karakter kullanıyorsunuz.)",
+  "minLength": "Lütfen en az %s karakter kullanın. (Şu anda %s karakter kullanıyorsunuz.)",
+  "minSelectOption": "Lütfen en az %s seçenek işaretleyin.",
+  "maxSelectOption": "Lütfen en fazla %s seçenek işaretleyin.",
+  "groupCheckBox": "Lütfen en az %s seçenek işaretleyin.",
+  "equal": "Bu alan %s ile uyuşmuyor.",
+  "fileMinSize": "Dosya boyutu en az %s byte olmalıdır.",
+  "fileMaxSize": "Dosya boyutu en fazla %s byte olmalıdır.",
+  "number": "Lütfen rakam yazın."
+}

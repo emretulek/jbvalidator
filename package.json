@@ -1,0 +1,19 @@
+{
+  "name": "jquery-bootstrap-from-validation",
+  "version": "1.0.0",
+  "description": "Jquery & Bootstrap html5 form validation",
+  "main": "src/jbvalidator.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "prod": "webpack --mode production"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@webpack-cli/init": "^1.0.2",
+    "copy-webpack-plugin": "^6.2.1",
+    "webpack": "^5.3.0",
+    "webpack-cli": "^4.1.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
