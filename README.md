@@ -28,7 +28,7 @@
                 let validator = $('form.needs-validation').jbvalidator({
                     errorMessage: true,
                     successClass: true,
-
+                    language: "https://raw.githubusercontent.com/emretulek/jbvalidator/main/dist/lang/en.json"
                 });
 
                 //custom validate methode
