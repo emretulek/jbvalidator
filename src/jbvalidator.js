@@ -338,8 +338,6 @@
 
             el.setCustomValidity(message);
             showErrorMessage(el, el.validationMessage);
-            event.preventDefault();
-            event.stopPropagation();
         }
 
         /**
