@@ -2,6 +2,8 @@
 
 ### HTML 5 & Bootstrap 5 & Jquery 3
 
+[DEMO LINK](https://emretulek.github.io/jbvalidator/)
+
 * **Html 5 validation**
 * **data-v-equal**: id of the element that should be the same
 * **data-v-min-select**: multiple selectbox, minimum selectable count
