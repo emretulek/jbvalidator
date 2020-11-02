@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
@@ -73,6 +75,7 @@
             </div>
             <div class="bg-light my-5 p-3">
                 <h3>Language file content</h3>
+                <code></code>
     <code><pre>
     {
       "maxValue": "The number you enter cannot be greater than %s.",
@@ -92,7 +95,7 @@
             <form class="needs-validation row g-3" novalidate>
                 <div class="col-12 bg-light">
                     <div class="p-2">
-                        form attribute novalidate is required
+                        The form's attribute have to novalidate
                         <code>
                             &lt;form novalidate&gt;
                         </code>
@@ -225,7 +228,7 @@
                             &lt;/div&gt;
                         </code>
                         <ul>
-                            <li>Checbox group attributes</li>
+                            <li>You have to create a parent element. The attributes apply to this parent. </li>
                             <li><b>data-checkbox-group</b>: parent attribute</li>
                             <li><b>data-v-min-select</b>: parent attribute, minimum selectable</li>
                             <li><b>data-v-required</b>: parent attribute, is required</li>
@@ -351,7 +354,7 @@
                             &lt;input type=&quot;text&quot; class=&quot;form-control&quot; minlength=&quot;10&quot; data-v-message=&quot;Please enter minimum 10 characters&quot; required&gt;
                         </code>
                         <ul>
-                            <li><b>data-v-message</b>: custom error message</li>
+                            <li><b>data-v-message</b>: This attribute allows you to change the original error message.</li>
                         </ul>
                     </div>
                 </div>
@@ -366,6 +369,7 @@
     <div class="row my-5 justify-content-center">
         <div class="col-md-8">
             <h3>Serverside validation</h3>
+            <p>You can show the error messages returned from the server. The ".errorTrigger" method can be used for this.</p>
             <p>.errorTrigger(element, message)</p>
             <div class="bg-light my-5 p-3">
     <code>
