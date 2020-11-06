@@ -1,5 +1,13 @@
 # HTML 5 & Bootstrap Jquery Form Validation Plugin
 
+jbvalidator is a fresh new jQuery based form validation plugin that is created for the latest Bootstrap 5 framework and supports both client side and server-side validation.
+
+- Multiple languages.
+- Custom error messages.
+- Custom validation rules.
+- Easy to use via HTML data attribute.
+
+
 ### HTML 5 & Bootstrap 5 & Jquery 3
 
 [DEMO LINK](https://emretulek.github.io/jbvalidator/)
