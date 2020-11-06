@@ -21,7 +21,7 @@
 
 ### Usage
 
-```
+```javascript
         
         <script src="dist/jbvalidator.min.js"></script>
         <script>
@@ -30,7 +30,7 @@
                 let validator = $('form.needs-validation').jbvalidator({
                     errorMessage: true,
                     successClass: true,
-                    language: "https://raw.githubusercontent.com/emretulek/jbvalidator/main/dist/lang/en.json"
+                    language: "dist/lang/en.json"
                 });
 
                 //custom validate methode
@@ -46,11 +46,12 @@
 
 ### Options
 
-```
+```javascript
     {
         language: '', //json file url
         errorMessage: true,
         successClass: false,
+        html5BrowserDefault: false,
         validFeedBackClass: 'valid-feedbak',
         invalidFeedBackClass: 'invalid-feedback',
         validClass: 'is-valid',
@@ -60,26 +61,76 @@
 
 ### Language file content
 
-```
-    {
-      "maxValue": "The number you enter cannot be greater than %s.",
-      "minValue": "The number you entered can be at least %s.",
-      "maxLength": "You can use up to %s characters. You are using %s characters.",
-      "minLength": "You must use at least %s characters, you are using %s characters.",
-      "minSelectOption": "Please select at least %s options.",
-      "maxSelectOption": "Please select at most %s options.",
-      "groupCheckBox": "Please select at least %s options.",
-      "equal": "Does not match the %s field.",
-      "fileMinSize": "File size cannot be less than %s bytes.",
-      "fileMaxSize": "File size cannot be more than %s bytes.",
-      "number": "Please write a number."
-    }
+```json
+      {
+        {
+          "maxValue": "Value must be less than or equal to %s.",
+          "minValue": "Value must be greater than or equal to %s.",
+          "maxLength": "Please lengthen this text to %s characters or less (you are currently using %s characters).",
+          "minLength": "Please lengthen this text to %s characters or more (you are currently using %s characters).",
+          "minSelectOption": "Please select at least %s options.",
+          "maxSelectOption": "Please select at most %s options.",
+          "groupCheckBox": "Please select at least %s options.",
+          "equal": "This field does not match with %s field.",
+          "fileMinSize": "File size cannot be less than %s bytes.",
+          "fileMaxSize": "File size cannot be more than %s bytes.",
+          "number": "Please enter a number.",
+          "HTML5": {
+            "valueMissing": {
+              "INPUT": {
+                "default": "Please fill out this field.",
+                "checkbox": "Please check this box.",
+                "radio": "Please select one of these options.",
+                "file": "Please select a file."
+              },
+              "SELECT": "Please select an item in the list."
+            },
+            "typeMismatch": {
+              "email": "Please enter an e-mail address.",
+              "url": "Please enter a URL."
+            },
+            "rangeUnderflow": {
+              "date": "Value must be %s or later.",
+              "month": "Value must be %s or later.",
+              "week": "Value must be %s or later.",
+              "time": "Value must be %s or later.",
+              "datetimeLocale": "Value must be %s or later.",
+              "number": "Value must be greater than or equal to %s.",
+              "range": "Value must be greater than or equal to %s."
+            },
+            "rangeOverflow": {
+              "date": "Value must be %s or earlier.",
+              "month": "Value must be %s or earlier.",
+              "week": "Value must be %s or earlier.",
+              "time": "Value must be %s or earlier.",
+              "datetimeLocale": "Value must be %s or earlier.",
+              "number": "Value must be less than or equal to %s.",
+              "range": "Value must be less than or equal to %s."
+            },
+            "stepMismatch": {
+              "date": "You can only select every %s. day in the date calendar.",
+              "month": "You can only select every %s. month in the date calendar.",
+              "week": "You can only select every %s. week in the date calendar.",
+              "time": "You can only select every %s. second in the time picker.",
+              "datetimeLocale": "You can only select every %s. second in the time picker.",
+              "number": "Please enter a valid value. Only %s and a multiple of %s.",
+              "range": "Please enter a valid value. Only %s and a multiple of %s."
+            },
+            "tooLong": "Please lengthen this text to %s characters or less (you are currently using %s characters).",
+            "tooShort": "Please lengthen this text to %s characters or more (you are currently using %s characters).",
+            "patternMismatch": "Please match the request format. %s",
+            "badInput": {
+              "number": "Please enter a number."
+            }
+          }
+        }
+
 ```
 
 ### Serverside validation
 
 .errorTrigger(element, message)
-```
+```javascript
         
         <script src="dist/jbvalidator.min.js"></script>
         <script>
@@ -95,7 +146,7 @@
 
                     $.ajax({
                         method:"get",
-                        url:"http://jsvalidation.test/test.json",
+                        url:"test.json",
                         data: $(this).serialize(),
                         success: function (data){
                             if(data.status === 'error') {
