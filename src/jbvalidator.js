@@ -7,6 +7,7 @@
             language: '', //json file url
             errorMessage: true,
             successClass: false,
+            html5BrowserDefault: false,
             validFeedBackClass: 'valid-feedbak',
             invalidFeedBackClass: 'invalid-feedback',
             validClass: 'is-valid',
@@ -18,17 +19,65 @@
         let FORM = this;
 
         let errorMessages = {
-            maxValue: "You cannot enter a number greater than %s.",
-            minValue: "Please enter a number greater than %s.",
-            maxLength: "Please use maximum %s character. You are using %s characters.",
-            minLength: "Please use minimum %s character, you are using %s characters.",
+            maxValue: "Value must be less than or equal to %s.",
+            minValue: "Value must be greater than or equal to %s.",
+            maxLength: "Please lengthen this text to %s characters or less (you are currently using %s characters).",
+            minLength: "Please lengthen this text to %s characters or more (you are currently using %s characters).",
             minSelectOption: "Please select at least %s options.",
             maxSelectOption: "Please select at most %s options.",
             groupCheckBox: "Please select at least %s options.",
-            equal: "This field does not match %s",
+            equal: "This field does not match with %s field.",
             fileMinSize: "File size cannot be less than %s bytes.",
             fileMaxSize: "File size cannot be more than %s bytes.",
-            number: "Please write a number."
+            number: "Please enter a number.",
+            HTML5: {
+                valueMissing: {
+                    INPUT: {
+                        default: "Please fill out this field.",
+                        checkbox: "Please check this box.",
+                        radio: "Please select one of these options.",
+                        file: "Please select a file."
+                    },
+                    SELECT: "Please select an item in the list."
+                },
+                typeMismatch: {
+                    email: "Please enter an e-mail address.",
+                    url: "Please enter a URL."
+                },
+                rangeUnderflow: {
+                    date: "Value must be %s or later.",
+                    month: "Value must be %s or later.",
+                    week: "Value must be %s or later.",
+                    time: "Value must be %s or later.",
+                    datetimeLocale: "Value must be %s or later.",
+                    number: "Value must be greater than or equal to %s.",
+                    range: "Value must be greater than or equal to %s."
+                },
+                rangeOverflow: {
+                    date: "Value must be %s or earlier.",
+                    month: "Value must be %s or earlier.",
+                    week: "Value must be %s or earlier.",
+                    time: "Value must be %s or earlier.",
+                    datetimeLocale: "Value must be %s or earlier.",
+                    number: "Value must be less than or equal to %s.",
+                    range: "Value must be less than or equal to %s."
+                },
+                stepMismatch: {
+                    date: "You can only select every %s. day in the date calendar.",
+                    month: "You can only select every %s. month in the date calendar.",
+                    week: "You can only select every %s. week in the date calendar.",
+                    time: "You can only select every %s. second in the time picker.",
+                    datetimeLocale: "You can only select every %s. second in the time picker.",
+                    number: "Please enter a valid value. Only %s and a multiple of %s.",
+                    range: "Please enter a valid value. Only %s and a multiple of %s."
+                },
+                tooLong: "Please lengthen this text to %s characters or less (you are currently using %s characters).",
+                tooShort: "Please lengthen this text to %s characters or more (you are currently using %s characters).",
+                patternMismatch: "Please match the request format. %s",
+                badInput: {
+                    number: "Please enter a number."
+                }
+            }
         };
 
         const selector = 'input, textarea, select';
@@ -89,20 +138,19 @@
 
             el.setCustomValidity('');
 
-            let error = '';
-
             if (el.checkValidity() !== false) {
 
                 Object.values(validator).map((value) => {
-                    error = value.call(value, el, event);
-                    if(error && value.name !== 'patternCustomMessage'){
+
+                    let error = value.call(value, el, event);
+
+                    if(error) {
                         el.setCustomValidity(error);
                     }
                 });
             } else {
-                if (el.validity.patternMismatch) {
-                    error = validator.patternCustomMessage(el);
-                    el.setCustomValidity(error)
+                if(!options.html5BrowserDefault) {
+                    el.setCustomValidity(HTML5Default(el))
                 }
             }
 
@@ -150,14 +198,6 @@
         }
 
         let validator = {
-
-            patternCustomMessage : function (el) {
-
-                if (hasAttr(el, 'pattern') && hasAttr(el, 'title')) {
-                    return $(el).attr('title');
-                }
-                return el.validationMessage;
-            },
 
             multiSelectMin : function (el) {
 
@@ -329,6 +369,119 @@
             }
         };
 
+        /**
+         * HTML 5 default error to selected language
+         * @param el
+         * @returns {null|jQuery|HTMLElement|undefined|string|*}
+         * @constructor
+         */
+        let HTML5Default = function (el){
+
+            if(el.validity.valueMissing){
+                if(el.tagName === 'INPUT'){
+
+                    if(typeof errorMessages.HTML5.valueMissing.INPUT[el.type] === 'undefined') {
+                        return errorMessages.HTML5.valueMissing.INPUT.default;
+                    }else {
+                        return errorMessages.HTML5.valueMissing.INPUT[el.type];
+                    }
+
+                }else {
+
+                    if(typeof errorMessages.HTML5.valueMissing[el.tagName] !== 'undefined') {
+                        return errorMessages.HTML5.valueMissing[el.tagName];
+                    }
+                }
+            }else if(el.validity.typeMismatch){
+
+                if(typeof errorMessages.HTML5.typeMismatch[el.type] !== 'undefined') {
+                    return errorMessages.HTML5.typeMismatch[el.type];
+                }
+
+            }else if(el.validity.rangeOverflow){
+
+                if(typeof errorMessages.HTML5.rangeOverflow[el.type] !== 'undefined') {
+                    let max = el.getAttribute('max') ?? null;
+
+                    if(el.type === 'date' || el.type === 'month'){
+                        let date = new Date(max);
+                        max = date.toLocaleDateString();
+                    }
+                    if(el.type === 'week'){
+                        max = "Week " + max.substr(6);
+                    }
+
+                    return errorMessages.HTML5.rangeOverflow[el.type].sprintf(max);
+                }
+
+            }else if(el.validity.rangeUnderflow){
+
+                if(typeof errorMessages.HTML5.rangeUnderflow[el.type] !== 'undefined') {
+                    let min = el.getAttribute('min') ?? null;
+
+                    if(el.type === 'date' || el.type === 'month'){
+                        let date = new Date(min);
+                        min = date.toLocaleDateString();
+                    }
+                    if(el.type === 'week'){
+                        min = "Week " + min.substr(6);
+                    }
+
+                    return errorMessages.HTML5.rangeUnderflow[el.type].sprintf(min);
+                }
+
+            }else if(el.validity.stepMismatch){
+
+                if(typeof errorMessages.HTML5.stepMismatch[el.type] !== 'undefined') {
+                    let step = el.getAttribute('step') ?? null;
+
+                    if(el.type === 'date' || el.type === 'month'){
+                        let date = new Date(step);
+                        step = date.toLocaleDateString();
+                    }
+                    if(el.type === 'week'){
+                        step = "Week " + step.substr(6);
+                    }
+
+                    return errorMessages.HTML5.stepMismatch[el.type].sprintf(step, step);
+                }
+
+            }else if(el.validity.tooLong){
+
+                let minLength = el.getAttribute('maxlength') ?? null;
+                let value = $(el).val();
+                return errorMessages.HTML5.tooLong.sprintf(minLength, value.length);
+
+            }else if(el.validity.tooShort){
+
+                let maxLength = el.getAttribute('minlength') ?? null;
+                let value = $(el).val();
+                return errorMessages.HTML5.tooShort.sprintf(maxLength, value.length);
+
+            }else if(el.validity.patternMismatch){
+
+                if (hasAttr(el, 'pattern') && hasAttr(el, 'title')) {
+                    return $(el).attr('title');
+                }
+                let pattern = el.getAttribute('pattern') ?? null;
+                return errorMessages.HTML5.patternMismatch.sprintf(pattern);
+
+            }else if(el.validity.badInput){
+
+                if(typeof errorMessages.HTML5.badInput[el.type] !== 'undefined') {
+                    return errorMessages.HTML5.badInput[el.type];
+                }
+
+            }
+
+            return el.validationMessage ?? '';
+        }
+
+        /**
+         * triger error
+         * @param el
+         * @param message
+         */
 
         let errorTrigger = function (el, message) {
 
