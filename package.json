@@ -1,8 +1,11 @@
 {
   "name": "jquery-bootstrap-from-validation",
   "version": "1.0.0",
+  "repository": "emretulek/jbvalidator",
+  "homepage": "https://emretulek.github.io/jbvalidator/",
   "description": "Jquery & Bootstrap html5 form validation",
-  "main": "src/jbvalidator.js",
+  "main": "dist/jbvalidator.min.js",
+  "browser": "dist/jbvalidator.min.js",
   "scripts": {
     "dev": "webpack --mode development",
     "prod": "webpack --mode production"
@@ -14,6 +17,10 @@
     "copy-webpack-plugin": "^6.2.1",
     "webpack": "^5.3.0",
     "webpack-cli": "^4.1.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "jquery": "^3.1.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.0.0-alpha2"
   }
 }
