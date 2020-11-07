@@ -1,7 +1,10 @@
 {
-  "name": "jbvalidator",
+  "name": "@emretulek/jbvalidator",
   "version": "1.0.0",
-  "repository": "emretulek/jbvalidator",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emretulek/jbvalidator.git"
+  },
   "homepage": "https://emretulek.github.io/jbvalidator/",
   "description": "Jquery & Bootstrap html5 form validation",
   "main": "dist/jbvalidator.min.js",
@@ -10,7 +13,7 @@
     "dev": "webpack --mode development",
     "prod": "webpack --mode production"
   },
-  "author": "",
+  "author": "<memretulek@gmail.com> Mehmet Emre Tülek",
   "license": "MIT",
   "devDependencies": {
     "@webpack-cli/init": "^1.0.2",
@@ -22,5 +25,17 @@
   },
   "dependencies": {
     "bootstrap": "^5.0.0-alpha2"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/emretulek/jbvalidator/issues"
+  },
+  "keywords": [
+    "form",
+    "input",
+    "validation",
+    "validator",
+    "bootstrap",
+    "jquery",
+    "plugin"
+  ]
 }
