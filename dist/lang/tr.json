@@ -1,0 +1,62 @@
+{
+  "maxValue": "Lütfen %s değerinden küçük veya ona eşit bir değer girin.",
+  "minValue": "Lütfen %s değerinden büyük veya ona eşit bir değer girin.",
+  "maxLength": "Lütfen bu metni %s veya daha az karakter olacak şekilde uzatın (şu anda %s karakter kullanıyorsunuz).",
+  "minLength": "Lütfen bu metni %s karakter veya daha fazla olacak şekilde uzatın (şu anda %s karakterini kullanıyorsunuz).",
+  "minSelectOption": "Lütfen en az %s seçeneği seçin.",
+  "maxSelectOption": "Lütfen en fazla %s seçeneği seçin.",
+  "groupCheckBox": "Lütfen en az %s seçeneği seçin.",
+  "equal": "Bu alan %s alanıyla eşleşmiyor.",
+  "fileMinSize": "Dosya boyutu %s bayttan az olamaz.",
+  "fileMaxSize": "Dosya boyutu %s bayttan fazla olamaz.",
+  "number": "Lütfen bir sayı girin.",
+  "HTML5": {
+    "valueMissing": {
+      "INPUT": {
+        "default": "Lütfen bu alanı doldurun.",
+        "checkbox": "Lütfen bu kutuyu işaretleyin.",
+        "radio": "Lütfen bu seçeneklerden birini seçin.",
+        "file": "Lütfen bir dosya seçin."
+      },
+      "SELECT": "Lütfen listeden bir öğe seçin."
+    },
+    "typeMismatch": {
+      "email": "Lütfen bir e-mail adresi girin.",
+      "url": "Lütfen bir URL girin."
+    },
+    "rangeUnderflow": {
+      "date": "Değer %s veya daha sonrası olmalıdır.",
+      "month": "Değer %s veya sonrası olmalıdır.",
+      "week": "Değer %s veya daha sonrası olmalıdır.",
+      "time": "Değer %s veya daha sonrası olmalıdır.",
+      "datetimeLocale": "Değer %s veya sonrası olmalıdır.",
+      "number": "Lütfen %s değerinden büyük veya ona eşit bir değer girin.",
+      "range": "Lütfen %s değerinden büyük veya ona eşit bir değer girin."
+    },
+    "rangeOverflow": {
+      "date": "Değer %s veya daha öncesi olmalıdır.",
+      "month": "Değer %s veya daha öncesi olmalıdır.",
+      "week": "Değer %s veya daha öncesi olmalıdır.",
+      "time": "Değer %s veya daha öncesi olmalıdır.",
+      "datetimeLocale": "Değer %s veya daha öncesi olmalıdır.",
+      "number": "Lütfen %s değerinden küçük veya ona eşit bir değer girin.",
+      "range": "Lütfen %s değerinden küçük veya ona eşit bir değer girin."
+    },
+    "stepMismatch": {
+      "date": "Tarih seçiminde gün %s ve katları olabilir.",
+      "month": "Ay seçiminde ay %s ve katları olabilir.",
+      "week": "Hafta seçiminde hafta %s ve katları olabilir.",
+      "time": "Saat seçiminde saniye %s ve katları olabilir.",
+      "datetimeLocale": "Zaman seçicide saniye %s ve katları olabilir.",
+      "number": "Lütfen geçerli bir değer girin. Yalnızca %s ve katları.",
+      "range": "Lütfen geçerli bir değer girin. Yalnızca %s ve katları."
+    },
+    "tooLong": "Lütfen bu metni %s karakter veya daha az olacak şekilde kısaltın (şu anda %s karakter kullanıyorsunuz).",
+    "tooShort": "Lütfen bu metni %s karakter veya daha fazla olacak şekilde uzatın (şu anda %s karakter kullanıyorsunuz).",
+    "patternMismatch": "Lütfen istenilen biçime uyun. %s",
+    "badInput": {
+      "number": "Lütfen bir sayı girin."
+    }
+  }
+}
+
