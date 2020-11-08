@@ -7,6 +7,15 @@ jbvalidator is a fresh new jQuery based form validation plugin that is created f
 - Custom validation rules.
 - Easy to use via HTML data attribute.
 
+### Installation
+
+```
+npm i @emretulek/jbvalidator
+```
+Or grab from jsdelivr CDN :
+```html
+<script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator/dist/jbvalidator.min.js"></script>
+```
 
 ### HTML 5 & Bootstrap 5 & Jquery 3
 
