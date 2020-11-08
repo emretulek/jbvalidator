@@ -37,7 +37,9 @@ Or grab from jsdelivr CDN :
 * **data-v-message**: alternative error mesage
 
 ### Usage
-
+```html
+The form's attribute have to novalidate <form novalidate> 
+```
 ```javascript
         
 <script src="dist/jbvalidator.min.js"></script>
