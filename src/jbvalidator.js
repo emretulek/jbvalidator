@@ -195,6 +195,12 @@
             if (options.successClass) {
                 $(el).addClass(options.validClass);
             }
+
+            let label = $(el).parent().find("label");
+            if(typeof label!=="undefined"){
+              $(label[0]).removeClass(options.invalidFeedBackClass);
+              $(label[0]).addClass(options.validFeedBackClass);
+            }
         }
 
         let validator = {
