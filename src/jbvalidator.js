@@ -8,7 +8,7 @@
             errorMessage: true,
             successClass: false,
             html5BrowserDefault: false,
-            validFeedBackClass: 'valid-feedbak',
+            validFeedBackClass: 'valid-feedback',
             invalidFeedBackClass: 'invalid-feedback',
             validClass: 'is-valid',
             invalidClass: 'is-invalid'
@@ -186,6 +186,11 @@
                     }
                 }
             }
+            let label = $(el).parent().find("label");
+            if(typeof label!=="undefined"){
+              $(label[0]).removeClass(options.validFeedBackClass);
+              $(label[0]).addClass(options.invalidFeedBackClass);
+            }
         }
 
         let hideErrorMessage = function (el) {
@@ -194,6 +199,12 @@
 
             if (options.successClass) {
                 $(el).addClass(options.validClass);
+            }
+
+            let label = $(el).parent().find("label");
+            if(typeof label!=="undefined"){
+              $(label[0]).removeClass(options.invalidFeedBackClass);
+              $(label[0]).addClass(options.validFeedBackClass);
             }
         }
 
