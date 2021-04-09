@@ -14,7 +14,7 @@ npm i @emretulek/jbvalidator
 ```
 Or grab from jsdelivr CDN :
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator/dist/jbvalidator.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator@latest/dist/jbvalidator.min.js"></script>
 ```
 
 ### HTML 5 & Bootstrap 5 & Jquery 3
