@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "@emretulek/jbvalidator": "^1.0.0",
-    "bootstrap": "^5.0.0-alpha2"
+    "bootstrap": "^5.0.0-beta3",
+    "jquery": "^3.1.0"
   },
   "bugs": {
     "url": "https://github.com/emretulek/jbvalidator/issues"
@@ -36,7 +37,6 @@
     "validation",
     "validator",
     "bootstrap",
-    "jquery",
-    "plugin"
+    "jquery-plugin"
   ]
 }
