@@ -71,7 +71,7 @@ The form's attribute have to novalidate <form novalidate>
         errorMessage: true,
         successClass: false,
         html5BrowserDefault: false,
-        validFeedBackClass: 'valid-feedbak',
+        validFeedBackClass: 'valid-feedback',
         invalidFeedBackClass: 'invalid-feedback',
         validClass: 'is-valid',
         invalidClass: 'is-invalid'
