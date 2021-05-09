@@ -125,7 +125,7 @@
 
                 if (hasAttr(el, 'data-v-equal')) {
                     let equal = $(el).attr('data-v-equal');
-                    $(equal).on('input', function (){
+                    $(equal).one('input', function (){
                         let id = $(this).attr('id');
                         $('[data-v-equal="#' + id + '"]').trigger('input');
                     });
