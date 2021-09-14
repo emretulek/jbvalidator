@@ -103,10 +103,7 @@
 
             STATUS = 0;
 
-            $(this).find(selector).each((i, el) => {
-
-                validationRun(el, event);
-            });
+            checkAll(event);
 
             if (STATUS) {
                 event.preventDefault();
@@ -114,25 +111,38 @@
             }
         });
 
+
+        let checkAll = function (event) {
+
+            STATUS = 0;
+            $(FORM).find(selector).each((i, el) => {
+                validationRun(el, event);
+            });
+
+            return STATUS;
+        }
+
         /**
          * run validate when on input
          */
-        $(FORM).find(selector).each((i, el) => {
+        let run = function () {
+            $(FORM).find(selector).each((i, el) => {
 
-            $(el).on('input', function (event) {
+                $(el).off('input');
+                $(el).on('input', function (event) {
 
-                validationRun(this, event);
+                    validationRun(this, event);
 
-                if (hasAttr(el, 'data-v-equal')) {
-                    let equal = $(el).attr('data-v-equal');
-                    $(equal).one('input', function (){
-                        let id = $(this).attr('id');
-                        $('[data-v-equal="#' + id + '"]').trigger('input');
-                    });
-                }
+                    if (hasAttr(el, 'data-v-equal')) {
+                        let equal = $(el).attr('data-v-equal');
+                        $(equal).one('input', function () {
+                            let id = $(this).attr('id');
+                            $('[data-v-equal="#' + id + '"]').trigger('input');
+                        });
+                    }
+                })
             })
-        })
-
+        }
 
         let validationRun = function (el, event) {
 
@@ -144,12 +154,12 @@
 
                     let error = value.call(value, el, event);
 
-                    if(error) {
+                    if (error) {
                         el.setCustomValidity(error);
                     }
                 });
             } else {
-                if(!options.html5BrowserDefault) {
+                if (!options.html5BrowserDefault) {
                     el.setCustomValidity(HTML5Default(el))
                 }
             }
@@ -178,11 +188,11 @@
                 let group = $(el).parent();
 
                 if ($(group).length) {
-                    let invalidFeedBack = $(group).find('.'+ options.invalidFeedBackClass);
+                    let invalidFeedBack = $(group).find('.' + options.invalidFeedBackClass);
                     if ($(invalidFeedBack).length) {
                         $(invalidFeedBack).html(message);
                     } else {
-                        $(group).append('<div class="'+options.invalidFeedBackClass+'">' + message + '</div>');
+                        $(group).append('<div class="' + options.invalidFeedBackClass + '">' + message + '</div>');
                     }
                 }
             }
@@ -199,7 +209,7 @@
 
         let validator = {
 
-            multiSelectMin : function (el) {
+            multiSelectMin: function (el) {
 
                 if ($(el).prop("tagName") === "SELECT" && $(el).prop('multiple')) {
 
@@ -213,7 +223,7 @@
                 return '';
             },
 
-            multiSelectMax : function (el) {
+            multiSelectMax: function (el) {
 
                 if ($(el).prop("tagName") === "SELECT" && $(el).prop('multiple')) {
 
@@ -227,7 +237,7 @@
                 return '';
             },
 
-            equal : function (el) {
+            equal: function (el) {
 
                 let equal = $(el).data('vEqual');
 
@@ -241,7 +251,7 @@
                 return '';
             },
 
-            groupCheckBox : function (el, event) {
+            groupCheckBox: function (el, event) {
 
                 if (hasAttr(el, 'type', 'checkbox')) {
 
@@ -252,7 +262,7 @@
 
                     if (checkGroup) {
 
-                        if(typeof event.originalEvent !== "undefined" && event.originalEvent.type === 'input') {
+                        if (typeof event.originalEvent !== "undefined" && event.originalEvent.type === 'input') {
                             $(checkGroup).find('input[type=checkbox]').each((i, item) => {
                                 $(item).trigger('input');
                             })
@@ -268,7 +278,7 @@
                 return '';
             },
 
-            customMin : function (el) {
+            customMin: function (el) {
 
                 if (hasAttr(el, 'data-v-min')) {
 
@@ -288,7 +298,7 @@
                 return '';
             },
 
-            customMax : function (el) {
+            customMax: function (el) {
 
                 if (hasAttr(el, 'data-v-max')) {
 
@@ -308,7 +318,7 @@
                 return '';
             },
 
-            customMinLength : function (el) {
+            customMinLength: function (el) {
 
                 if (hasAttr(el, 'data-v-min-length')) {
 
@@ -322,7 +332,7 @@
                 return '';
             },
 
-            customMaxLength : function (el) {
+            customMaxLength: function (el) {
 
                 if (hasAttr(el, 'data-v-max-length')) {
 
@@ -336,7 +346,7 @@
                 return '';
             },
 
-            fileMinSize : function (el) {
+            fileMinSize: function (el) {
 
                 if (hasAttr(el, 'type', 'file')) {
 
@@ -352,7 +362,7 @@
                 return '';
             },
 
-            fileMaxSize : function (el) {
+            fileMaxSize: function (el) {
 
                 if (hasAttr(el, 'type', 'file')) {
 
@@ -375,90 +385,90 @@
          * @returns {null|jQuery|HTMLElement|undefined|string|*}
          * @constructor
          */
-        let HTML5Default = function (el){
+        let HTML5Default = function (el) {
 
-            if(el.validity.valueMissing){
-                if(el.tagName === 'INPUT'){
+            if (el.validity.valueMissing) {
+                if (el.tagName === 'INPUT') {
 
-                    if(typeof errorMessages.HTML5.valueMissing.INPUT[el.type] === 'undefined') {
+                    if (typeof errorMessages.HTML5.valueMissing.INPUT[el.type] === 'undefined') {
                         return errorMessages.HTML5.valueMissing.INPUT.default;
-                    }else {
+                    } else {
                         return errorMessages.HTML5.valueMissing.INPUT[el.type];
                     }
 
-                }else {
+                } else {
 
-                    if(typeof errorMessages.HTML5.valueMissing[el.tagName] !== 'undefined') {
+                    if (typeof errorMessages.HTML5.valueMissing[el.tagName] !== 'undefined') {
                         return errorMessages.HTML5.valueMissing[el.tagName];
                     }
                 }
-            }else if(el.validity.typeMismatch){
+            } else if (el.validity.typeMismatch) {
 
-                if(typeof errorMessages.HTML5.typeMismatch[el.type] !== 'undefined') {
+                if (typeof errorMessages.HTML5.typeMismatch[el.type] !== 'undefined') {
                     return errorMessages.HTML5.typeMismatch[el.type];
                 }
 
-            }else if(el.validity.rangeOverflow){
+            } else if (el.validity.rangeOverflow) {
 
-                if(typeof errorMessages.HTML5.rangeOverflow[el.type] !== 'undefined') {
+                if (typeof errorMessages.HTML5.rangeOverflow[el.type] !== 'undefined') {
                     let max = el.getAttribute('max') ?? null;
 
-                    if(el.type === 'date' || el.type === 'month'){
+                    if (el.type === 'date' || el.type === 'month') {
                         let date = new Date(max);
                         max = date.toLocaleDateString();
                     }
-                    if(el.type === 'week'){
+                    if (el.type === 'week') {
                         max = "Week " + max.substr(6);
                     }
 
                     return errorMessages.HTML5.rangeOverflow[el.type].sprintf(max);
                 }
 
-            }else if(el.validity.rangeUnderflow){
+            } else if (el.validity.rangeUnderflow) {
 
-                if(typeof errorMessages.HTML5.rangeUnderflow[el.type] !== 'undefined') {
+                if (typeof errorMessages.HTML5.rangeUnderflow[el.type] !== 'undefined') {
                     let min = el.getAttribute('min') ?? null;
 
-                    if(el.type === 'date' || el.type === 'month'){
+                    if (el.type === 'date' || el.type === 'month') {
                         let date = new Date(min);
                         min = date.toLocaleDateString();
                     }
-                    if(el.type === 'week'){
+                    if (el.type === 'week') {
                         min = "Week " + min.substr(6);
                     }
 
                     return errorMessages.HTML5.rangeUnderflow[el.type].sprintf(min);
                 }
 
-            }else if(el.validity.stepMismatch){
+            } else if (el.validity.stepMismatch) {
 
-                if(typeof errorMessages.HTML5.stepMismatch[el.type] !== 'undefined') {
+                if (typeof errorMessages.HTML5.stepMismatch[el.type] !== 'undefined') {
                     let step = el.getAttribute('step') ?? null;
 
-                    if(el.type === 'date' || el.type === 'month'){
+                    if (el.type === 'date' || el.type === 'month') {
                         let date = new Date(step);
                         step = date.toLocaleDateString();
                     }
-                    if(el.type === 'week'){
+                    if (el.type === 'week') {
                         step = "Week " + step.substr(6);
                     }
 
                     return errorMessages.HTML5.stepMismatch[el.type].sprintf(step, step);
                 }
 
-            }else if(el.validity.tooLong){
+            } else if (el.validity.tooLong) {
 
                 let minLength = el.getAttribute('maxlength') ?? null;
                 let value = $(el).val();
                 return errorMessages.HTML5.tooLong.sprintf(minLength, value.length);
 
-            }else if(el.validity.tooShort){
+            } else if (el.validity.tooShort) {
 
                 let maxLength = el.getAttribute('minlength') ?? null;
                 let value = $(el).val();
                 return errorMessages.HTML5.tooShort.sprintf(maxLength, value.length);
 
-            }else if(el.validity.patternMismatch){
+            } else if (el.validity.patternMismatch) {
 
                 if (hasAttr(el, 'pattern') && hasAttr(el, 'title')) {
                     return $(el).attr('title');
@@ -466,9 +476,9 @@
                 let pattern = el.getAttribute('pattern') ?? null;
                 return errorMessages.HTML5.patternMismatch.sprintf(pattern);
 
-            }else if(el.validity.badInput){
+            } else if (el.validity.badInput) {
 
-                if(typeof errorMessages.HTML5.badInput[el.type] !== 'undefined') {
+                if (typeof errorMessages.HTML5.badInput[el.type] !== 'undefined') {
                     return errorMessages.HTML5.badInput[el.type];
                 }
 
@@ -491,6 +501,10 @@
 
             el.setCustomValidity(message);
             showErrorMessage(el, el.validationMessage);
+        }
+
+        let reload = function () {
+            run();
         }
 
         /**
@@ -534,9 +548,13 @@
             return output;
         }
 
+        run();
+
         return {
             validator,
-            errorTrigger
+            errorTrigger,
+            reload,
+            checkAll
         }
     }
 })(jQuery);

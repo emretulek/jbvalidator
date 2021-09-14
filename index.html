@@ -39,6 +39,15 @@
                 </ul>
             </div>
             <div class="bg-light my-5 p-3">
+                <h3>Methods</h3>
+                <ul>
+                    <li><b>validator</b>: add new custom validation</li>
+                    <li><b>checkAll()</b>: show errors without submitting the form, return error count</li>
+                    <li><b>errorTrigger()</b>: show the error messages returned from the server.</li>
+                    <li><b>reload()</b>: reload instance after dynamic element is added</li>
+                </ul>
+            </div>
+            <div class="bg-light my-5 p-3">
                 <h3>Usage</h3>
                 <code>
         <pre>
@@ -58,10 +67,61 @@
                         return 'Your password is too weak.';
                     }
                 }
+
+                validator.validator.example = function(el, event){
+                    if($(el).is('[name=username]') && $(el).val().length < 3){
+                        return 'Your username is too short.';
+                    }
+                }
+
+                //check form without submit
+                validator.checkAll(); //return error count
+
+                //reload instance after dynamic element is added
+                validator.reload();
             })
         &lt;/script&gt;
         </pre>
                 </code>
+            </div>
+            <div class="col-md-12">
+                <h3>Serverside validation</h3>
+                <p>You can show the error messages returned from the server. The ".errorTrigger" method can be used for
+                    this.</p>
+                <p>.errorTrigger(element, message)</p>
+                <div class="bg-light my-5 p-3">
+                    <code>
+        <pre>
+        &lt;script src=&quot;dist/jbvalidator.min.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            $(function (){
+
+               let validatorServerSide = $('form.validatorServerSide').jbvalidator({
+                    errorMessage: true,
+                    successClass: false,
+                });
+
+                //serverside
+                $(document).on('submit', '.validatorServerSide', function(){
+
+                    $.ajax({
+                        method:"get",
+                        url:"http://jsvalidation.test/test.json",
+                        data: $(this).serialize(),
+                        success: function (data){
+                            if(data.status === 'error') {
+                                validatorServerSide.errorTrigger($('[name=username]'), data.message);
+                            }
+                        }
+                    })
+
+                    return false;
+                });
+            })
+        &lt;/script&gt;
+        </pre>
+                    </code>
+                </div>
             </div>
             <div class="bg-light my-5 p-3">
                 <h3>Options</h3>
@@ -489,45 +549,7 @@
     </div>
 
     <div class="row my-5 justify-content-center">
-        <div class="col-md-8">
-            <h3>Serverside validation</h3>
-            <p>You can show the error messages returned from the server. The ".errorTrigger" method can be used for
-                this.</p>
-            <p>.errorTrigger(element, message)</p>
-            <div class="bg-light my-5 p-3">
-                <code>
-        <pre>
-        &lt;script src=&quot;dist/jbvalidator.min.js&quot;&gt;&lt;/script&gt;
-        &lt;script&gt;
-            $(function (){
 
-               let validatorServerSide = $('form.validatorServerSide').jbvalidator({
-                    errorMessage: true,
-                    successClass: false,
-                });
-
-                //serverside
-                $(document).on('submit', '.validatorServerSide', function(){
-
-                    $.ajax({
-                        method:"get",
-                        url:"http://jsvalidation.test/test.json",
-                        data: $(this).serialize(),
-                        success: function (data){
-                            if(data.status === 'error') {
-                                validatorServerSide.errorTrigger($('[name=username]'), data.message);
-                            }
-                        }
-                    })
-
-                    return false;
-                });
-            })
-        &lt;/script&gt;
-        </pre>
-                </code>
-            </div>
-        </div>
         <div class="col-md-8">
 
             <form class="validatorServerSide row g-3" novalidate>
@@ -552,7 +574,6 @@
             </form>
         </div>
     </div>
-
 </div>
 
 
