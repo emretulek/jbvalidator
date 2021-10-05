@@ -103,7 +103,7 @@
 
             STATUS = 0;
 
-            checkAll(event);
+            checkAll(this, event);
 
             if (STATUS) {
                 event.preventDefault();
@@ -112,11 +112,12 @@
         });
 
 
-        let checkAll = function (event) {
-
+        let checkAll = function (form, event) {
+            let thisForm = form ? form : FORM;
+            let thisEvent = event ? event : '';
             STATUS = 0;
-            $(FORM).find(selector).each((i, el) => {
-                validationRun(el, event);
+            $(thisForm).find(selector).each((i, el) => {
+                validationRun(el, thisEvent);
             });
 
             return STATUS;
