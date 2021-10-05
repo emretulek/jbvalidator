@@ -1,4 +1,7 @@
-# HTML 5 & Bootstrap Jquery Form Validation Plugin
+HTML 5 & Bootstrap Jquery Form Validation Plugin
+================================================
+
+### HTML 5 & Bootstrap 5 & Jquery 3
 
 jbvalidator is a fresh new jQuery based form validation plugin that is created for the latest Bootstrap 5 framework and supports both client side and server-side validation.
 
@@ -17,31 +20,32 @@ Or grab from jsdelivr CDN :
 <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
 ```
 
-### HTML 5 & Bootstrap 5 & Jquery 3
+##### [DEMO LINK](https://emretulek.github.io/jbvalidator/)
 
-[DEMO LINK](https://emretulek.github.io/jbvalidator/)
+-   **Html 5 validation**
+-   **data-v-equal**: id of the element that should be the same
+-   **data-v-min-select**: multiple selectbox, minimum selectable count
+-   **data-v-max-select**: multiple selectbox, maximum selectable count
+-   **data-checkbox-group**: the parent attribute of group checkbox elements
+-   **data-v-min**: alternative of the min attribute, this can be used for attribute type text
+-   **data-v-max**: alternative of the max attribute, this can be used for attribute type text
+-   **data-v-min-length**: alternative of the minlength attribute
+-   **data-v-max-length**: alternative of the maxlength attribute
+-   **data-v-min-size**: the input type file minimum file size (byte)
+-   **data-v-max-size**: the input type file maximum file size (byte)
+-   **data-v-message**: alternative error mesage
 
-* **Html 5 validation**
-* **data-v-equal**: id of the element that should be the same
-* **data-v-min-select**: multiple selectbox, minimum selectable count
-* **data-v-max-select**: multiple selectbox, maximum selectable count
-* **data-checkbox-group**: the parent attribute of group checkbox elements
-**data-v-min-select**: parent attribute minimum selectable count
-**data-v-required**: parent attribute required
-* **data-v-min**: alternative of the min attribute, this can be used for attribute type text
-* **data-v-max**: alternative of the max attribute, this can be used for attribute type text
-* **data-v-min-length**: alternative of the minlength attribute
-* **data-v-max-length**: alternative of the maxlength attribute
-* **data-v-min-size**: the input type file minimum file size (byte)
-* **data-v-max-size**: the input type file maximum file size (byte)
-* **data-v-message**: alternative error mesage
+### Methods
+
+-   **validator**: add new custom validation
+-   **checkAll(formSelector = null, event = null)**: show errors without submitting the form, return error count
+-   **errorTrigger(inputSelector, message)**: show the error messages returned from the server.
+-   **reload()**: reload instance after dynamic element is added
 
 ### Usage
-```html
-The form's attribute have to novalidate <form novalidate> 
-```
+
+The form's attribute have to novalidate `<form novalidate>`
 ```javascript
-        
 <script src="dist/jbvalidator.min.js"></script>
 <script>
     $(function (){
@@ -49,7 +53,7 @@ The form's attribute have to novalidate <form novalidate>
         let validator = $('form.needs-validation').jbvalidator({
             errorMessage: true,
             successClass: true,
-            language: "dist/lang/en.json"
+            language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
         });
 
         //custom validate methode
@@ -58,29 +62,75 @@ The form's attribute have to novalidate <form novalidate>
                 return 'Your password is too weak.';
             }
         }
+
+        validator.validator.example = function(el, event){
+            if($(el).is('[name=username]') && $(el).val().length < 3){
+                return 'Your username is too short.';
+            }
+        }
+
+        //check form without submit
+        validator.checkAll(); //return error count
+
+        //reload instance after dynamic element is added
+        validator.reload();
     })
 </script>
-        
+```
+
+### Serverside validation
+
+You can show the error messages returned from the server. The ".errorTrigger" method can be used for this.
+
+.errorTrigger(element, message)
+
+```javascript
+<script src="dist/jbvalidator.min.js"></script>
+<script>
+    $(function (){
+
+       let validatorServerSide = $('form.validatorServerSide').jbvalidator({
+            errorMessage: true,
+            successClass: false,
+        });
+
+        //serverside
+        $(document).on('submit', '.validatorServerSide', function(){
+
+            $.ajax({
+                method:"get",
+                url:"http://jsvalidation.test/test.json",
+                data: $(this).serialize(),
+                success: function (data){
+                    if(data.status === 'error') {
+                        validatorServerSide.errorTrigger($('[name=username]'), data.message);
+                    }
+                }
+            })
+
+            return false;
+        });
+    })
+</script>
 ```
 
 ### Options
 
-```javascript
+```
 {
-        language: '', //json file url
-        errorMessage: true,
-        successClass: false,
-        html5BrowserDefault: false,
-        validFeedBackClass: 'valid-feedback',
-        invalidFeedBackClass: 'invalid-feedback',
-        validClass: 'is-valid',
-        invalidClass: 'is-invalid'
+    language: '', //json file url
+    errorMessage: true,
+    successClass: false,
+    html5BrowserDefault: false,
+    validFeedBackClass: 'valid-feedback',
+    invalidFeedBackClass: 'invalid-feedback',
+    validClass: 'is-valid',
+    invalidClass: 'is-invalid'
 }
 ```
 
 ### Language file content
-
-```json
+```
 {
   "maxValue": "Value must be less than or equal to %s.",
   "minValue": "Value must be greater than or equal to %s.",
@@ -142,40 +192,4 @@ The form's attribute have to novalidate <form novalidate>
     }
   }
 }
-
-```
-
-### Serverside validation
-
-.errorTrigger(element, message)
-```javascript
-        
-<script src="dist/jbvalidator.min.js"></script>
-<script>
-    $(function (){
-
-       let validatorServerSide = $('form.validatorServerSide').jbvalidator({
-            errorMessage: true,
-            successClass: false,
-        });
-
-        //serverside
-        $(document).on('submit', '.validatorServerSide', function(){
-
-            $.ajax({
-                method:"get",
-                url:"test.json",
-                data: $(this).serialize(),
-                success: function (data){
-                    if(data.status === 'error') {
-                        validatorServerSide.errorTrigger($('[name=username]'), data.message);
-                    }
-                }
-            })
-
-            return false;
-        });
-    })
-</script>
-        
 ```
