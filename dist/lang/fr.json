@@ -18,7 +18,8 @@
         "radio": "Veuillez sélectionner l'une de ces options.",
         "file": "Veuillez sélectionner un fichier."
       },
-      "SELECT": "Veuillez sélectionner un élément de la liste."
+      "SELECT": "Veuillez sélectionner un élément de la liste.",
+      "TEXTAREA": "Veuillez remplir ce champ."
     },
     "typeMismatch": {
       "email": "Veuillez saisir une adresse e-mail valide.",
