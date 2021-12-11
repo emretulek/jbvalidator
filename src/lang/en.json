@@ -18,7 +18,8 @@
         "radio": "Please select one of these options.",
         "file": "Please select a file."
       },
-      "SELECT": "Please select an item in the list."
+      "SELECT": "Please select an item in the list.",
+      "TEXTAREA": "Please fill out this field."
     },
     "typeMismatch": {
       "email": "Please enter an e-mail address.",

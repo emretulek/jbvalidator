@@ -18,7 +18,8 @@
         "radio": "Lütfen bu seçeneklerden birini seçin.",
         "file": "Lütfen bir dosya seçin."
       },
-      "SELECT": "Lütfen listeden bir öğe seçin."
+      "SELECT": "Lütfen listeden bir öğe seçin.",
+      "TEXTAREA": "Lütfen bu alanı doldurun."
     },
     "typeMismatch": {
       "email": "Lütfen bir e-mail adresi girin.",
