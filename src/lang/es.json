@@ -1,0 +1,62 @@
+{
+    "maxValue": "El valor debe ser menor o igual a %s.",
+    "minValue": "El valor debe ser mayor o igual a %s.",
+    "maxLength": "Por favor, alargue este texto a %s caracteres o menos (actualmente está usando %s caracteres).",
+    "minLength": "Por favor, alargue este texto a %s caracteres o más (actualmente está usando %s caracteres).",
+    "minSelectOption": "Por favor, seleccione al menos %s opciones.",
+    "maxSelectOption": "Por favor, seleccione como máximo %s opciones.",
+    "groupCheckBox": "Por favor, seleccione al menos %s opciones.",
+    "equal": "Este campo no coincide con el campo %s.",
+    "fileMinSize": "El tamaño del archivo no puede ser inferior a %s bytes.",
+    "fileMaxSize": "El tamaño del archivo no puede ser superior a %s bytes.",
+    "number": "Por favor, introduzca un número.",
+    "HTML5": {
+      "valueMissing": {
+        "INPUT": {
+          "default": "Por favor, rellene este campo.",
+          "checkbox": "Por favor, marque esta casilla.",
+          "radio": "Por favor, seleccione una de estas opciones.",
+          "file": "Por favor, seleccione un archivo."
+        },
+        "SELECT": "Por favor, seleccione un elemento de la lista.",
+        "TEXTAREA": "Por favor, rellene este campo."
+      },
+      "typeMismatch": {
+        "email": "Por favor, introduzca una dirección de correo electrónico.",
+        "url": "Por favor, introduzca una URL."
+      },
+      "rangeUnderflow": {
+        "date": "El valor debe ser %s o posterior",
+        "month": "El valor debe ser %s o posterior.",
+        "week": "El valor debe ser %s o posterior.",
+        "time": "El valor debe ser %s o posterior.",
+        "datetimeLocale": "El valor debe ser %s o posterior.",
+        "number": "El valor debe ser mayor o igual a %s.",
+        "range": "El valor debe ser mayor o igual a %s."
+      },
+      "rangeOverflow": {
+        "date": "El valor debe ser %s o anterior.",
+        "month": "El valor debe ser %s o anterior.",
+        "week": "El valor debe ser %s o anterior.",
+        "time": "El valor debe ser %s o anterior.",
+        "datetimeLocale": "El valor debe ser %s o anterior.",
+        "number": "El valor debe ser menor o igual a %s.",
+        "range": "El valor debe ser menor o igual a %s."
+      },
+      "stepMismatch": {
+        "date": "Sólo puede seleccionar cada %s. días en el calendario de fechas.",
+        "month": "Sólo puede seleccionar cada %s. meses en el calendario de fechas.",
+        "week": "Sólo puede seleccionar cada %s. semanas en el calendario de fechas.",
+        "time": "Sólo puede seleccionar cada %s. segundos en el selector de tiempo.",
+        "datetimeLocale": "Sólo puede seleccionar cada %s. segundos en el selector de tiempo.",
+        "number": "Por favor, introduzca un valor válido. Sólo %s y un múltiplo de %s.",
+        "range": "Por favor, introduzca un valor válido. Sólo %s y un múltiplo de %s."
+      },
+      "tooLong": "Por favor, alargue este texto a %s caracteres o menos (actualmente está usando %s caracteres).",
+      "tooShort": "Por favor, alargue este texto a %s caracteres o más (actualmente está usando %s caracteres).",
+      "patternMismatch": "Por favor, concuerda con el formato de la solicitud. %s",
+      "badInput": {
+        "number": "Por favor, introduzca un número."
+      }
+    }
+  }
